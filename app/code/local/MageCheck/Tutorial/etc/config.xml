@@ -1,0 +1,11 @@
+<events>
+    <cms_page_prepare_save>
+        <observers>
+            <MageCheck_Tutorial_Model_Observer>
+                <type>singleton</type>
+                <class>magecheck_tutorial/observer</class>
+                <method>customObserver</method>
+            </MageCheck_Tutorial_Model_Observer>
+        </observers>
+    </cms_page_prepare_save>
+</events>

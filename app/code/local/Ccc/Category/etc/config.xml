@@ -1,19 +1,18 @@
+<?xml version="1.0" ?>
 <config>
     <modules>
-        <Ccc_Category>
-            <version>1.0.0.0</version>                
+        <Ccc_Category>    
+            <version>1.0.0</version>
         </Ccc_Category>
     </modules>
     <frontend>
-        <routers>
-            <category>
-                <use>standard</use>
-                <args>
-                    <module>Ccc_Category</module>
-                    <frontName>category</frontName>
-                </args>
-            </category>
-        </routers>
+        <layout>
+            <updates>
+                <Category module="Ccc_Category">
+                    <file>Ccc_Category.xml</file>
+                </Category>
+            </updates>
+        </layout>
     </frontend>
     <global>
         <resources>
@@ -43,6 +42,7 @@
             </category>
             <category_resource>
                 <class>Ccc_Category_Model_Resource</class>
+                <deprecatedNode>category_mysql4</deprecatedNode>
                 <entities>
                     <category>
                         <table>category</table>
@@ -50,53 +50,33 @@
                 </entities>
             </category_resource>
         </models>
-        <!-- <resources>
-             <category_setup>
-                 <setup>
-                 <module>Ccc_Category</module>
-                 </setup>
-             </category_setup>
-
-        <category_write>
-            <connection>
-                <use>core_write</use>
-            </connection>
-        </category_write>
-
-        <category_read>
-            <connection>
-                <use>core_read</use>
-            </connection>
-        </category_read>
-         </resources> -->
         <blocks>
             <category>
                 <class>Ccc_Category_Block</class>
             </category>
         </blocks>
         <helpers>
-            <category>
-                <class>Ccc_Category_Helper</class>
+           <category>
+                  <class>Ccc_category_Helper</class>
             </category>
         </helpers>
-        
     </global>
     <admin>
         <routers>
-            <adminhtml>
+            <Category>
+                <use>admin</use>
                 <args>
-                    <modules>
-                        <ccc_category before="Mage_Adminhtml">Ccc_Category_Adminhtml</ccc_category>
-                    </modules>
+                    <module>Ccc_Category</module>
+                    <frontName>category</frontName>
                 </args>
-            </adminhtml>
+            </Category>
         </routers>
-  </admin>
-  <layout>
-      <updates>
-        <category>
-          <file>category.xml</file>
-        </category>
-      </updates>
-    </layout>
+         <layout>
+            <updates>
+                <category>
+                    <file>category.xml</file>
+                </category>
+            </updates>
+        </layout>
+    </admin>
 </config>
