@@ -1,9 +1,9 @@
 <?php
-class Dax_Dax_Model_Resource_Dax_Collection extends Mage_Core_Model_Resource_Db_Collection_Abstract
+class Dax_Dax_Model_Resource_Dax_Collection extends Mage_Catalog_Model_Resource_Collection_Abstract
 {
-    protected function _construct()
-    {
-        $this->_init('dax/dax');
-    }
-
+	public function __construct()
+	{
+		$this->setEntity('dax');
+		parent::__construct();	
+	}
 }

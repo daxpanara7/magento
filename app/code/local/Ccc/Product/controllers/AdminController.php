@@ -9,12 +9,6 @@ class Ccc_Product_AdminController extends Mage_Core_Controller_Front_Action
 	{
 		$this->_title($this->__('Customers'))->_title($this->__('Manage Customers'));
 		$this->loadLayout();
-		// $this->_setActiveMenu('Product/managevender');
-		// $this->_addContent(
-        //     $this->getLayout()->createBlock('adminhtml/product', 'product')
-        // );
-
-		// $model = Mage::getModel('product/product');
 		$block = $this->getLayout()->createBlock('product/Product');
 		$helper = Mage::helper('product/product');
 		$helper = Mage::helper('product/data');
