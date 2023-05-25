@@ -8,16 +8,16 @@ class Ccc_Salesman_Block_Adminhtml_Salesman_Edit_Tab_Form extends Mage_Adminhtml
 		$SalesmanField = $form->addFieldset('salesman_form',array('legend'=>Mage::helper('salesman')->__('Salesman information')));
 
 
-		$SalesmanField->addField('fname', 'text', array(
+		$SalesmanField->addField('first_name', 'text', array(
             'label' => Mage::helper('salesman')->__('First Name'),
             'required' => true,
-            'name' => 'salesman[fname]',
+            'name' => 'salesman[first_name]',
 		));
 
-		$SalesmanField->addField('lname', 'text', array(
+		$SalesmanField->addField('last_name', 'text', array(
             'label' => Mage::helper('salesman')->__('Last Name'),
             'required' => true,
-            'name' => 'salesman[lname]',
+            'name' => 'salesman[last_name]',
 		));
 
 		$SalesmanField->addField('email', 'text', array(

@@ -1,8 +1,11 @@
-<?php
-class Dax_Dax_Model_Resource_Dax extends Mage_Core_Model_Resource_Db_Abstract
+<?php 
+class Dax_Dax_Model_Resource_Dax extends Mage_Eav_Model_Entity_Abstract
 {
-    protected function _construct()
-    {
-        $this->_init('dax/dax', 'entity_id');
-    }    
+	const ENTITY = 'dax';
+	public function __construct()
+	{
+		$this->setType(self::ENTITY)
+			 ->setConnection('core_read', 'core_write');
+	   parent::__construct();
+    }
 }

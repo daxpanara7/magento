@@ -1,71 +1,78 @@
-<?php
+<?php 
+
 class Dax_Dax_Block_Adminhtml_Dax_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
-    public function __construct()
-    {
-        parent::__construct();
-        $this->setId('daxAdminhtmldaxGrid');
-        $this->setDefaultSort('entity_id');
-        $this->setDefaultDir('ASC');
-    }
+	public function __construct(){
+		parent::__construct();
+		$this->setId('daxId');
+		$this->setDefaultSort('entity_Id');
+		$this->setDeafultDir('DESC');
+		$this->setSaveParametersInSession(true);
+		$this->setVarNameFilter('dax_filter');
+	}
 
-    protected function _prepareMassaction()
+    protected function _prepareCollection()
     {
-        $this->setMassactionIdField('entity_id');
-        $this->getMassactionBlock()->setFormFieldName('entity_id');
-         
-        $this->getMassactionBlock()->addItem('delete', array(
-        'label'=> Mage::helper('dax')->__('Delete'),
-        'url'  => $this->getUrl('*/*/massDelete', array('' => '')),
-        'confirm' => Mage::helper('dax')->__('Are you sure?')
-        ));
-         
+        $collection = Mage::getModel('dax/dax')->getCollection()
+            ->addAttributeToSelect('firstname')
+            ->addAttributeToSelect('lastname')
+            ->addAttributeToSelect('email')
+            ->addAttributeToSelect('phoneNo')
+            ->addAttributeToSelect('price_attribute');
+
+        $adminStore = Mage_Core_Model_App::ADMIN_STORE_ID;
+       
+        $collection->joinAttribute(
+            'id',
+            'dax/entity_id',
+            'entity_id',
+            null,
+            'inner',
+            $adminStore
+        );
+
+        $this->setCollection($collection);
+        parent::_prepareCollection();
         return $this;
     }
 
-   protected function _prepareCollection()
+	protected function _prepareColumns()
     {
-        $collection = Mage::getModel('dax/dax')->getCollection();
-        $this->setCollection($collection);
+        $this->addColumn('id',
+            array(
+                'header' => Mage::helper('dax')->__('id'),
+                'width'  => '50px',
+                'index'  => 'id',
+            ));
+        $this->addColumn('firstname',
+            array(
+                'header' => Mage::helper('dax')->__('First Name'),
+                'width'  => '50px',
+                'index'  => 'firstname',
+            ));
 
-        return parent::_prepareCollection();
-    }
+        $this->addColumn('lastname',
+            array(
+                'header' => Mage::helper('dax')->__('Last Name'),
+                'width'  => '50px',
+                'index'  => 'lastname',
+            ));
 
-    protected function _prepareColumns()
-    {
-        $baseUrl = $this->getUrl();
-
-        $this->addColumn('entity_id', array(
-            'header'    => Mage::helper('dax')->__('Entity Id'),
-            'align'     => 'left',
-            'index'     => 'entity_id',
-        ));
-
-        $this->addColumn('name', array(
-            'header'    => Mage::helper('dax')->__('Name'),
-            'align'     => 'left',
-            'index'     => 'name'
-        ));
-
-       
-        $this->addColumn('status', array(
-            'header'    => Mage::helper('dax')->__('status'),
-            'align'     => 'left',
-            'index'     => 'status'
-        ));
-
-        $this->addColumn('description', array(
-            'header'    => Mage::helper('dax')->__('Description'),
-            'align'     => 'left',
-            'index'     => 'description'
-        ));
-
-        return parent::_prepareColumns();
+        $this->addColumn('email',
+            array(
+                'header' => Mage::helper('dax')->__('Email'),
+                'width'  => '50px',
+                'index'  => 'email',
+            ));
+        
+        parent::_prepareColumns();
+        return $this;
     }
 
     public function getRowUrl($row)
     {
-        return $this->getUrl('*/*/edit', array('entity_id' => $row->getId()));
+        return $this->getUrl('*/*/edit', array(
+            'id'    => $row->getId())
+        );
     }
-   
 }
