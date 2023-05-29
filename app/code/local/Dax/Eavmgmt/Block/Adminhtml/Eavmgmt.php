@@ -1,6 +1,6 @@
 <?php
 
-class Dax_Eavmgmt_Block_Adminhtml_eavmgmt extends Mage_Adminhtml_Block_Widget_Grid_Container
+class Dax_eavmgmt_Block_Adminhtml_eavmgmt extends Mage_Adminhtml_Block_Widget_Grid_Container
 {
 
    

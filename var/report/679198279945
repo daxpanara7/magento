@@ -1,0 +1,9 @@
+a:5:{i:0;s:298:"Error in file: "C:\xampp\htdocs\2023\magento\magento-mirror\app\code\local\Dax\Idx\sql\Idx_setup\mysql4-install-0.1.0.php" - SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Idx_setup' for key 'PRIMARY', query was: INSERT INTO `core_resource` (`code`, `version`) VALUES (?, ?)";i:1;s:1100:"#0 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Model\Resource\Setup.php(644): Mage::exception('Mage_Core', 'Error in file: ...')
+#1 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Model\Resource\Setup.php(421): Mage_Core_Model_Resource_Setup->_modifyResourceDb('install', '', '1.0.2')
+#2 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Model\Resource\Setup.php(327): Mage_Core_Model_Resource_Setup->_installResourceDb('1.0.2')
+#3 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Model\Resource\Setup.php(235): Mage_Core_Model_Resource_Setup->applyUpdates()
+#4 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Model\App.php(444): Mage_Core_Model_Resource_Setup::applyAllUpdates()
+#5 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Model\App.php(370): Mage_Core_Model_App->_initModules()
+#6 C:\xampp\htdocs\2023\magento\magento-mirror\app\Mage.php(686): Mage_Core_Model_App->run(Array)
+#7 C:\xampp\htdocs\2023\magento\magento-mirror\index.php(83): Mage::run('', 'store')
+#8 {main}";s:3:"url";s:44:"/2023/magento/magento-mirror/index.php/admin";s:11:"script_name";s:38:"/2023/magento/magento-mirror/index.php";s:4:"skin";s:7:"default";}
