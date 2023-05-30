@@ -1,5 +1,5 @@
 <?php
-class Dax_Idx_Model_Resource_Idx extends Mage_Core_Model_Resource_Db_Abstract
+class Dax_Idx_Model_Idx extends Mage_Core_Model_Abstract
 {
     protected function _construct()
     {

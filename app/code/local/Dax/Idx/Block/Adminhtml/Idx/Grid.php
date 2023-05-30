@@ -10,6 +10,8 @@ class Dax_Idx_Block_Adminhtml_Idx_Grid extends Mage_Adminhtml_Block_Widget_Grid
     protected function _prepareCollection()
     {
         $collection = Mage::getModel('idx/idx')->getCollection();
+        // echo "<pre>";
+        // var_dump($collection);die();
         $this->setCollection($collection);
         return parent::_prepareCollection();
     }
