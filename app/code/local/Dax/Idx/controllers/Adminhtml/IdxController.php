@@ -5,7 +5,6 @@ class Dax_Idx_Adminhtml_IdxController extends Mage_Adminhtml_Controller_Action
     public function indexAction()
     {
         $this->_title($this->__('Idx'))
-             // ->_title($this->__('Manage Idxs'))
              ->_title($this->__('Manage Idxs'));
         $this->loadLayout();
         $this->_addContent($this->getLayout()->createBlock('idx/adminhtml_idx'));
@@ -14,7 +13,6 @@ class Dax_Idx_Adminhtml_IdxController extends Mage_Adminhtml_Controller_Action
 
     protected function _initAction()
     {
-        // load layout, set active menu and breadcrumbs
         $this->loadLayout()
             ->_setActiveMenu('idx/idx')
             ->_addBreadcrumb(Mage::helper('idx')->__('idx Manager'), Mage::helper('idx')->__('idx Manager'))
@@ -41,7 +39,6 @@ class Dax_Idx_Adminhtml_IdxController extends Mage_Adminhtml_Controller_Action
                 return;
             }
         }
-        // echo "<pre>";print_r($model->load($id));die;
         $this->_title($model->getId() ? $model->getTitle() : $this->__('New idx'));
 
         $data = Mage::getSingleton('adminhtml/session')->getFormData(true);
@@ -149,9 +146,6 @@ class Dax_Idx_Adminhtml_IdxController extends Mage_Adminhtml_Controller_Action
             $idxCollectionArray = $idx->getCollection()->getData();
             $idxBrandNames = array_column($idxCollectionArray,'brand');
         
-            // print_r($idxCollectionArray);
-            // print_r($idxBrandNames);
-
             $newBrands = $idx->updateBrandTable(array_unique($idxBrandNames));
 
             print_r($newBrands);
