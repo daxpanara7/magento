@@ -1,25 +1,19 @@
-<?xml version="1.0"?>
 <config>
     <modules>
-        <Dax_Idx>
-            <version>0.1.0</version>
+        <Dax_Idx>    
+            <version>0.2.0</version>
         </Dax_Idx>
     </modules>
+    <frontend>
+        <layout>
+            <updates>
+                <Idx module="Dax_Idx">
+                    <file>Dax_Idx.xml</file>
+                </Idx>
+            </updates>
+        </layout>
+    </frontend>
     <global>
-        <models>
-            <idx>
-                <class>Dax_Idx_Model</class>
-                <resourceModel>idx_resource</resourceModel>
-            </idx>
-            <idx_resource>
-                <class>Dax_Idx_Model_Resource</class>
-                <entities>
-                    <idx>
-                        <table>import_product_idx</table>
-                    </idx>
-                </entities>
-            </idx_resource>
-        </models>
         <resources>
             <idx_setup>
                 <setup>
@@ -39,27 +33,49 @@
                     <use>core_read</use>
                 </connection>
             </idx_read>
-        </resources>
+        </resources>        
+        <models>
+            <idx>
+                <class>Dax_Idx_Model</class>
+                <resourceModel>idx_resource</resourceModel>
+            </idx>
+            <idx_resource>
+                <class>Dax_Idx_Model_Resource</class>
+                <deprecatedNode>idx_mysql4</deprecatedNode>
+                <entities>
+                    <idx>
+                        <table>import_product_idx</table>
+                    </idx>
+                </entities>
+            </idx_resource>
+        </models>
         <blocks>
             <idx>
                 <class>Dax_Idx_Block</class>
             </idx>
         </blocks>
         <helpers>
-            <idx>
-                <class>Dax_Idx_Helper</class>
+           <idx>
+                  <class>Dax_Idx_Helper</class>
             </idx>
         </helpers>
     </global>
     <admin>
         <routers>
-            <idx>
+            <Idx>
                 <use>admin</use>
                 <args>
                     <module>Dax_Idx</module>
                     <frontName>idx</frontName>
                 </args>
-            </idx>
+            </Idx>
         </routers>
+         <layout>
+            <updates>
+                <idx>
+                    <file>idx.xml</file>
+                </idx>
+            </updates>
+        </layout>
     </admin>
 </config>
