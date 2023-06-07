@@ -1,14 +1,16 @@
 <?php
+
 /**
  * 
  */
-class Dax_Brand_Block_Adminhtml_Brand_Grid_Renderer_Grid extends Mage_Adminhtml_Block_Widget_Grid_Column_Renderer_Abstract
+class Dax_Brand_Block_Adminhtml_brand_Grid_Renderer_Grid extends Mage_Adminhtml_Block_Widget_Grid_Column_Renderer_Abstract		
 {
 	
-	public function render(Varien_Object $row)
+	function render($row)
 	{
-		$filename = $row->image;
-		$html = "<img src='http://127.0.0.1/2023/magento/magento-mirror/media/brand/".$filename."' width='80px' height='80px'>";
-		return $html;
+		$name = $row->getImage();
+		$path = Mage::getBaseUrl('media').DS.$name;
+		$path = "<img src='$path' alt='img' width='50' height='60'>";
+		return $path;
 	}
 }

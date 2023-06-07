@@ -53,6 +53,13 @@ class Dax_Brand_Block_Adminhtml_Brand_Grid extends Mage_Adminhtml_Block_Widget_G
             'index'     => 'image',
             'renderer' => 'Dax_Brand_Block_Adminhtml_Brand_Grid_Renderer_Grid',
         ));
+        
+        $this->addColumn('brand_banner', array(
+            'header'    => Mage::helper('brand')->__('Brand Banner'),
+            'align'     => 'left',
+            'index'     => 'brand_banner',
+            'renderer'=> 'Dax_Brand_Block_Adminhtml_brand_Grid_Renderer_Banner',
+        ));
 
         $this->addColumn('description', array(
             'header'    => Mage::helper('brand')->__('Description'),

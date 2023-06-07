@@ -7,6 +7,11 @@ class Dax_Brand_Block_Adminhtml_Brand_Edit_Tab_Form extends Mage_Adminhtml_Block
 		$this->setForm($form);
 		$brandField = $form->addFieldset('brand_form',array('legend'=>Mage::helper('brand')->__('Brand information')));
 
+		$brandField->addField('url_key', 'text', array(
+            'label' => Mage::helper('brand')->__('URL Key'),
+            'required' => true,
+            'name' => 'url_key',
+		));
 
 		$brandField->addField('name', 'text', array(
             'label' => Mage::helper('brand')->__('Brand Name'),
@@ -21,6 +26,11 @@ class Dax_Brand_Block_Adminhtml_Brand_Edit_Tab_Form extends Mage_Adminhtml_Block
             'name' => 'image',
 		));
 
+        $brandField->addField('banner', 'file', array(
+            'label' => Mage::helper('brand')->__('Banner'),
+            'required' => true,
+            'name' => 'banner',
+		));
 		$brandField->addField('description', 'text', array(
             'label' => Mage::helper('brand')->__('Description'),
             'required' => true,
