@@ -7,16 +7,10 @@ class Dax_Brand_Block_Adminhtml_Brand_Edit_Tab_Form extends Mage_Adminhtml_Block
 		$this->setForm($form);
 		$brandField = $form->addFieldset('brand_form',array('legend'=>Mage::helper('brand')->__('Brand information')));
 
-		$brandField->addField('url_key', 'text', array(
-            'label' => Mage::helper('brand')->__('URL Key'),
-            'required' => true,
-            'name' => 'url_key',
-		));
-
 		$brandField->addField('name', 'text', array(
             'label' => Mage::helper('brand')->__('Brand Name'),
             'required' => true,
-            'name' => 'name',
+        'name' => 'brand[name]',
 		));
 
 
@@ -34,7 +28,12 @@ class Dax_Brand_Block_Adminhtml_Brand_Edit_Tab_Form extends Mage_Adminhtml_Block
 		$brandField->addField('description', 'text', array(
             'label' => Mage::helper('brand')->__('Description'),
             'required' => true,
-            'name' => 'description',
+            'name' => 'brand[description]',
+		));
+		$brandField->addField('sort_order', 'text', array(
+            'label' => Mage::helper('brand')->__('Sort order'),
+            'required' => true,
+            'name' => 'brand[sort_order]',
 		));
 
 		if ( Mage::getSingleton('adminhtml/session')->getbrandData() )

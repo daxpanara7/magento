@@ -1,9 +1,12 @@
 <?php
-
-class Dax_Banner_Helper_Data extends Mage_Core_Helper_Abstract
+/**
+ * 
+ */
+class Hemin_Brand_Helper_Data extends Mage_Core_Helper_Abstract
 {
-
-	public function __construct()
+	
+	function __construct()
 	{
+		// code...
 	}
 }
