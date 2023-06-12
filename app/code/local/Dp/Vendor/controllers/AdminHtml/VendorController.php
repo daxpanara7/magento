@@ -47,7 +47,7 @@ class Dp_Vendor_Adminhtml_VendorController extends Mage_Adminhtml_Controller_Act
             $addressData = $this->getRequest()->getPost('address');
             $vendorModel->setData($vendorData)
                         ->setPassword($vendorData['password'])
-                        ->setId($this->getRequest()->getParam('id'));
+                        ->setId($this->getRequest()->getParam('vendor_id'));
 
             if ($vendorModel->vendor_id == NULL) {
                 $vendorModel->created_at = date("y-m-d H:i:s");
