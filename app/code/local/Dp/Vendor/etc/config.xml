@@ -1,7 +1,7 @@
 <config>
     <modules>
         <Dp_Vendor>    
-            <version>1.0.0</version>
+            <version>0.1.0</version>
         </Dp_Vendor>
     </modules>
     <frontend>
@@ -64,6 +64,15 @@
         </helpers>
     </global>
     <admin>
+        <!-- <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Dp_Vendor>Dp_Vendor_Adminhtml</Dp_Vendor>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers> -->
         <routers>
             <Vendor>
                 <use>admin</use>
