@@ -1,19 +1,28 @@
-<?xml version="1.0" ?>
+<?xml version="1.0"?>
 <config>
     <modules>
-        <Dax_Brand>    
-            <version>1.0.4</version>
+        <Dax_Brand>
+            <version>1.1.1</version>
         </Dax_Brand>
-    </modules>
-    <frontend>        
+    </modules> 
+    <frontend>
+        <routers>
+            <brand>
+                <use>standard</use>
+                <args>
+                    <module>Dax_Brand</module>
+                    <frontName>brand</frontName>
+                </args>
+            </brand>
+        </routers>
         <layout>
             <updates>
-                <Brand module="Dax_Brand">
+                <brand module="Dax_Brand">
                     <file>brand.xml</file>
-                </Brand>
+                </brand>
             </updates>
         </layout>
-    </frontend>
+    </frontend>   
     <global>
         <resources>
             <brand_setup>
@@ -42,7 +51,7 @@
                         <is_global>0</is_global>
                         <frontend_input>select</frontend_input>
                         <frontend_label>Brand Attribute</frontend_label>
-                        <source_model>hemin_brand/source_model</source_model>
+                        <source_model>dax_brand/source_model</source_model>
                         <backend_type>int</backend_type>
                         <is_required>0</is_required>
                         <apply_to>simple,configurable,virtual,bundle,downloadable</apply_to>
@@ -51,7 +60,6 @@
             </catalog_product>
         </fieldsets>
         <models>
-            
             <brand>
                 <class>Dax_Brand_Model</class>
                 <resourceModel>brand_resource</resourceModel>
@@ -63,6 +71,12 @@
                     <brand>
                         <table>brand</table>
                     </brand>
+                    <brand_address>
+                        <table>brand_address</table>
+                    </brand_address>
+                    <brand_price>
+                        <table>brand_price</table>
+                    </brand_price>
                 </entities>
             </brand_resource>
         </models>
@@ -72,36 +86,20 @@
             </brand>
         </blocks>
         <helpers>
-           <brand>
-                  <class>Dax_brand_Helper</class>
+            <brand>
+                <class>Dax_Brand_Helper</class>
             </brand>
         </helpers>
     </global>
     <admin>
-        <!-- <routers>
-            <adminhtml>
-                <args>
-                    <modules>
-                        <Dax_brand>Dax_brand_Adminhtml</Dax_brand>
-                    </modules>
-                </args>
-            </adminhtml>
-        </routers> -->
         <routers>
-            <Brand>
+            <brand>
                 <use>admin</use>
                 <args>
                     <module>Dax_Brand</module>
                     <frontName>brand</frontName>
                 </args>
-            </Brand>
+            </brand>
         </routers>
-         <layout>
-            <updates>
-                <brand>
-                    <file>brand.xml</file>
-                </brand>
-            </updates>
-        </layout>
     </admin>
 </config>

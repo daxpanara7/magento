@@ -1,15 +1,10 @@
 <?php
-/**
- * 
- */
 class Dax_Brand_IndexController extends Mage_Core_Controller_Front_Action
 {
-	
-	function indexAction()
+	public function viewAction()
 	{
 		$this->loadLayout();
-        $this->getLayout()->getBlock('head')->setTitle($this->__('Brands'));
-        $this->renderLayout();
+		$this->renderLayout();
 	}
-
 }
+?>

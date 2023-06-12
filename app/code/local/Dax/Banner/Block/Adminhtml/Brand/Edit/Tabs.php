@@ -1,5 +1,5 @@
 <?php
-class Hemin_Brand_Block_Adminhtml_Brand_Edit_Tabs extends Mage_Adminhtml_Block_Widget_Tabs
+class Dax_Brand_Block_Adminhtml_Brand_Edit_Tabs extends Mage_Adminhtml_Block_Widget_Tabs
 {
 	public function __construct()
 	{

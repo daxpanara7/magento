@@ -1,5 +1,5 @@
 <?php
-class Hemin_Brand_Adminhtml_BrandController extends Mage_Adminhtml_Controller_Action
+class Dax_Brand_Adminhtml_BrandController extends Mage_Adminhtml_Controller_Action
 {
     public function indexAction()
     {

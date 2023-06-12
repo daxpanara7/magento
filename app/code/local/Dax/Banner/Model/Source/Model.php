@@ -1,12 +1,11 @@
 <?php
-
-class Hemin_Brand_Model_Source_Model extends Mage_Eav_Model_Entity_Attribute_Source_Abstract implements Mage_Eav_Model_Entity_Attribute_Source_Interface
+class Dax_Banner_Model_Source_Model extends Mage_Eav_Model_Entity_Attribute_Source_Abstract implements Mage_Eav_Model_Entity_Attribute_Source_Interface
 {
     public function getAllOptions()
     {
-        $brand = Mage::getModel('brand/brand')->getCollection()->getItems();
+        $banner = Mage::getModel('banner/banner')->getCollection()->getItems();
         $arr = array();
-        foreach ($brand as $k=>$v) {
+        foreach ($banner as $k=>$v) {
             $arr[] = array('value'=>$k, 'label'=>$v->name);
         }
         return $arr;

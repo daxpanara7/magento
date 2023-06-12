@@ -25,6 +25,8 @@ class Dax_Brand_Block_Adminhtml_Brand_Grid extends Mage_Adminhtml_Block_Widget_G
 
    protected function _prepareCollection()
     {
+        // echo "<pre>";
+        // print_r(Mage::getModel('brand/brand')->getCollection());die;
         $collection = Mage::getModel('brand/brand')->getCollection();
         $this->setCollection($collection);
 
@@ -42,39 +44,31 @@ class Dax_Brand_Block_Adminhtml_Brand_Grid extends Mage_Adminhtml_Block_Widget_G
         ));
 
         $this->addColumn('name', array(
-            'header'    => Mage::helper('brand')->__('Name'),
+            'header'    => Mage::helper('brand')->__('Brand Name'),
             'align'     => 'left',
-            'index'     => 'name',
-        ));
-
+            'index'     => 'name'
+        )); 
         $this->addColumn('image', array(
-            'header'    => Mage::helper('brand')->__('Image'),
+            'header'    => Mage::helper('brand')->__('Brand Image'),
             'align'     => 'left',
             'index'     => 'image',
-            'renderer' => 'Dax_Brand_Block_Adminhtml_Brand_Grid_Renderer_Grid',
-        ));
-        
-        $this->addColumn('brand_banner', array(
-            'header'    => Mage::helper('brand')->__('Brand Banner'),
-            'align'     => 'left',
-            'index'     => 'brand_banner',
-            'renderer'=> 'Dax_Brand_Block_Adminhtml_brand_Grid_Renderer_Banner',
+            'renderer'=>'Dax_Brand_Block_Adminhtml_Brand_Grid_Renderer_Grid'
         ));
 
         $this->addColumn('description', array(
             'header'    => Mage::helper('brand')->__('Description'),
             'align'     => 'left',
-            'index'     => 'description',
+            'index'     => 'description'
         ));
         $this->addColumn('created_at', array(
             'header'    => Mage::helper('brand')->__('Created_at'),
             'align'     => 'left',
-            'index'     => 'created_at',
+            'index'     => 'created_at'
         ));
         $this->addColumn('updated_at', array(
-            'header'    => Mage::helper('brand')->__('Updated_at'),
+            'header'    => Mage::helper('brand')->__('updated_at'),
             'align'     => 'left',
-            'index'     => 'updated_at',
+            'index'     => 'updated_at'
         ));
 
         return parent::_prepareColumns();

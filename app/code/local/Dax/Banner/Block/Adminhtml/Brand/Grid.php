@@ -1,5 +1,5 @@
 <?php
-class Hemin_Brand_Block_Adminhtml_Brand_Grid extends Mage_Adminhtml_Block_Widget_Grid
+class Dax_Brand_Block_Adminhtml_Brand_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
     public function __construct()
     {
@@ -50,7 +50,7 @@ class Hemin_Brand_Block_Adminhtml_Brand_Grid extends Mage_Adminhtml_Block_Widget
             'header'    => Mage::helper('brand')->__('Brand Image'),
             'align'     => 'left',
             'index'     => 'image',
-            'renderer'=>'Hemin_Brand_Block_Adminhtml_Brand_Grid_Renderer_Grid'
+            'renderer'=>'Dax_Brand_Block_Adminhtml_Brand_Grid_Renderer_Grid'
         ));
 
         $this->addColumn('description', array(

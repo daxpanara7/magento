@@ -7,6 +7,9 @@ class Dax_Brand_Block_Adminhtml_Brand_Edit extends Mage_Adminhtml_Block_Widget_F
 		$this->_objectId = 'brand_id';
 		$this->_blockGroup = 'brand';
 		$this->_controller = 'adminhtml_brand';
+
+
+
 		$this->_updateButton('save', 'label', Mage::helper('brand')->__('Save'));
 		$this->_updateButton('delete', 'label', Mage::helper('brand')->__('Delete'));
 

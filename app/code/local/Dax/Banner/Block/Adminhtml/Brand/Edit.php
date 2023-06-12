@@ -1,5 +1,5 @@
 <?php
-class Hemin_Brand_Block_Adminhtml_Brand_Edit extends Mage_Adminhtml_Block_Widget_Form_Container
+class Dax_Brand_Block_Adminhtml_Brand_Edit extends Mage_Adminhtml_Block_Widget_Form_Container
 {
 	public function __construct()
 	{

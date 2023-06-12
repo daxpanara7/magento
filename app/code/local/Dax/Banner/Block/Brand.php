@@ -1,5 +1,5 @@
 <?php
-class Hemin_Brand_Block_Brand extends Mage_Core_Block_Template
+class Dax_Brand_Block_Brand extends Mage_Core_Block_Template
 {
     public function __construct()
     {

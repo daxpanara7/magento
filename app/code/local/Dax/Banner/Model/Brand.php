@@ -1,5 +1,5 @@
 <?php
-class Hemin_Brand_Model_Brand extends Mage_Core_Model_Abstract
+class Dax_Brand_Model_Brand extends Mage_Core_Model_Abstract
 {
     function __construct()
     {
@@ -23,7 +23,7 @@ class Hemin_Brand_Model_Brand extends Mage_Core_Model_Abstract
         $brandId = $this->brand_id;
         $brand = Mage::getModel('brand/brand')->load($brandId);
         $urlKey = $this->url_key;
-        $rewriteUrl = 'brand/' . $urlKey;
+        $rewriteUrl = $urlKey;
         $rewrite = Mage::getModel('core/url_rewrite')->getCollection()
             ->addFieldToFilter('request_path', $rewriteUrl)
             ->getFirstItem();

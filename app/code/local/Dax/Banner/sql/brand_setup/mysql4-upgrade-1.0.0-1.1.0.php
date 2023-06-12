@@ -7,7 +7,7 @@ $installer->addAttribute(4, 'brand', array(
     'input'                       => 'select',
     'label'                       => 'Brand',
     'sort_order'                  => '',
-    'source'                      => 'Hemin_Brand_Model_Source_Model',
+    'source'                      => 'Dax_Brand_Model_Source_Model',
     'required'                    => 0,
     'visible'                     => 1,
     'user_defined'                => 1,

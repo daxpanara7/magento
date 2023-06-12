@@ -1,107 +1,91 @@
-<?xml version="1.0" ?>
 <config>
     <modules>
-        <Hemin_Brand>    
-            <version>1.2.0</version>
-        </Hemin_Brand>
+        <Dax_Banner>    
+            <version>0.1.0</version>
+        </Dax_Banner>
     </modules>
-    <frontend>        
+    <frontend>
+        <routers>
+            <banner>
+                <use>standard</use>
+                <args>
+                    <module>Dax_Banner</module>
+                    <frontName>banner</frontName>
+                </args>
+            </banner>
+        </routers>
         <layout>
             <updates>
-                <Brand module="Hemin_Brand">
-                    <file>brand.xml</file>
-                </Brand>
+                <banner module="Dax_Banner">
+                    <file>banner.xml</file>
+                </banner>
             </updates>
         </layout>
     </frontend>
     <global>
+        <models>
+            <banner>
+                <class>Dax_Banner_Model</class>
+                <resourceModel>banner_resource</resourceModel>
+            </banner>
+            <group>
+                <class>Dax_Banner_Model_Group</class>
+                <resourceModel>group_resource</resourceModel>
+            </group>
+            <banner_resource>
+                <class>Dax_Banner_Model_Resource</class>
+                <deprecatedNode>banner_mysql4</deprecatedNode>
+                <entities>
+                    <banner>
+                        <table>banner</table>
+                    </banner>
+                    <group>
+                        <table>banner_group</table>
+                    </group>
+                </entities>
+            </banner_resource>
+        </models>
         <resources>
-            <brand_setup>
+            <banner_setup>
                 <setup>
-                    <module>Hemin_Brand</module>
+                    <module>Dax_Banner</module>
+                    <class>Mage_Core_Model_Resource_Setup</class>
                 </setup>
                 <connection>
                     <use>core_setup</use>
                 </connection>
-            </brand_setup>
-            <brand_write>
+            </banner_setup>
+            <banner_write>
                 <connection>
                     <use>core_write</use>
                 </connection>
-            </brand_write>
-            <brand_read>
+            </banner_write>
+            <banner_read>
                 <connection>
                     <use>core_read</use>
                 </connection>
-            </brand_read>
+            </banner_read>
         </resources>
-        <fieldsets>
-            <catalog_product>
-                <brand>
-                    <brand_attribute>
-                        <is_global>0</is_global>
-                        <frontend_input>select</frontend_input>
-                        <frontend_label>Brand Attribute</frontend_label>
-                        <source_model>hemin_brand/source_model</source_model>
-                        <backend_type>int</backend_type>
-                        <is_required>0</is_required>
-                        <apply_to>simple,configurable,virtual,bundle,downloadable</apply_to>
-                    </brand_attribute>
-                </brand>
-            </catalog_product>
-        </fieldsets>
-        <models>
-            
-            <brand>
-                <class>Hemin_Brand_Model</class>
-                <resourceModel>brand_resource</resourceModel>
-            </brand>
-            <brand_resource>
-                <class>Hemin_Brand_Model_Resource</class>
-                <deprecatedNode>brand_mysql4</deprecatedNode>
-                <entities>
-                    <brand>
-                        <table>brand</table>
-                    </brand>
-                </entities>
-            </brand_resource>
-        </models>
         <blocks>
-            <brand>
-                <class>Hemin_Brand_Block</class>
-            </brand>
+            <banner>
+                <class>Dax_Banner_Block</class>
+            </banner>
         </blocks>
         <helpers>
-           <brand>
-                  <class>Hemin_brand_Helper</class>
-            </brand>
+           <banner>
+                  <class>Dax_banner_Helper</class>
+            </banner>
         </helpers>
     </global>
     <admin>
-        <!-- <routers>
-            <adminhtml>
-                <args>
-                    <modules>
-                        <Hemin_brand>Hemin_brand_Adminhtml</Hemin_brand>
-                    </modules>
-                </args>
-            </adminhtml>
-        </routers> -->
         <routers>
-            <Brand>
+            <Banner>
                 <use>admin</use>
                 <args>
-                    <module>Hemin_Brand</module>
-                    <frontName>brand</frontName>
+                    <module>Dax_Banner</module>
+                    <frontName>banner</frontName>
                 </args>
-            </Brand>
+            </Banner>
         </routers>
-         <layout>
-            <updates>
-                <brand>
-                    <file>brand.xml</file>
-                </brand>
-            </updates>
-        </layout>
     </admin>
 </config>
