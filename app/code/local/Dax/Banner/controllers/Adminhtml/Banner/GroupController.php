@@ -1,4 +1,3 @@
-
 <?php
 class Dax_Banner_Adminhtml_Banner_GroupController extends Mage_Adminhtml_Controller_Action
 {
