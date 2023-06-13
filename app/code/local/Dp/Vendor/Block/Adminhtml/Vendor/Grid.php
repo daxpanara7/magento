@@ -9,25 +9,10 @@ class Dp_Vendor_Block_Adminhtml_Vendor_Grid extends Mage_Adminhtml_Block_Widget_
         $this->setDefaultDir('ASC');
     }
 
-    protected function _prepareMassaction()
-    {
-        $this->setMassactionIdField('vendor_id');
-        $this->getMassactionBlock()->setFormFieldName('vendor_id');
-         
-        $this->getMassactionBlock()->addItem('delete', array(
-        'label'=> Mage::helper('vendor')->__('Delete'),
-        'url'  => $this->getUrl('*/*/massDelete', array('' => '')),
-        'confirm' => Mage::helper('vendor')->__('Are you sure?')
-        ));
-         
-        return $this;
-    }
-
    protected function _prepareCollection()
     {
         $collection = Mage::getModel('vendor/vendor')->getCollection();
         $this->setCollection($collection);
-
         return parent::_prepareCollection();
     }
 
@@ -41,16 +26,10 @@ class Dp_Vendor_Block_Adminhtml_Vendor_Grid extends Mage_Adminhtml_Block_Widget_
             'index'     => 'vendor_id',
         ));
 
-        $this->addColumn('fname', array(
-            'header'    => Mage::helper('vendor')->__('First Name'),
+        $this->addColumn('name', array(
+            'header'    => Mage::helper('vendor')->__('Name'),
             'align'     => 'left',
-            'index'     => 'fname'
-        ));
-
-        $this->addColumn('lname', array(
-            'header'    => Mage::helper('vendor')->__('Last Name'),
-            'align'     => 'left',
-            'index'     => 'lname'
+            'index'     => 'name'
         ));
 
         $this->addColumn('email', array(
@@ -65,32 +44,65 @@ class Dp_Vendor_Block_Adminhtml_Vendor_Grid extends Mage_Adminhtml_Block_Widget_
             'index'     => 'mobile'
         ));
 
-        $this->addColumn('gender', array(
-            'header'    => Mage::helper('vendor')->__('Gender'),
-            'align'     => 'left',
-            'index'     => 'gender'
-        ));
-
         $this->addColumn('status', array(
             'header'    => Mage::helper('vendor')->__('Status'),
             'align'     => 'left',
-            'index'     => 'status'
+            'index'     => 'status',
+            'type'      => 'options',
+            'options'   => array(
+                '1' => $this->__('Active'),
+                '0' => $this->__('Not Active'),
+            ),
         ));
 
-        $this->addColumn('company', array(
-            'header'    => Mage::helper('vendor')->__('Company'),
+        $this->addColumn('created_at', array(
+            'header'    => Mage::helper('vendor')->__('Created At'),
             'align'     => 'left',
-            'index'     => 'company'
+            'index'     => 'created_at'
         ));
 
-
+        $this->addColumn('updated_at', array(
+            'header'    => Mage::helper('vendor')->__('Updated At'),
+            'align'     => 'left',
+            'index'     => 'updated_at'
+        ));
 
         return parent::_prepareColumns();
+    }
+
+    protected function _prepareMassaction()
+    {
+        $this->setMassactionIdField('vendor_id');
+        $this->getMassactionBlock()->setFormFieldName('vendor_id');
+         
+        $this->getMassactionBlock()->addItem('delete', array(
+        'label'=> Mage::helper('vendor')->__('Delete'),
+        'url'  => $this->getUrl('*/*/massDelete', array('' => '')),
+        'confirm' => Mage::helper('vendor')->__('Are you sure?')
+        ));
+
+        $statuses = Mage::getSingleton('vendor/vendor')->getStatuses();
+        array_unshift($statuses, array('label' => '', 'value' => ''));
+        $this->getMassactionBlock()->addItem('status', array(
+            'label'      => $this->__('Change Status'),
+            'url'        => $this->getUrl('*/*/massStatus', array('_current'=>true)),
+            'additional' => array(
+                'visibility' => array(
+                    'name'   => 'status',
+                    'type'   => 'select',
+                    'class'  => 'required-entry',
+                    'label'  => $this->__('Status'),
+                    'values' => $statuses,
+                )
+            )
+        ));
+
+         
+        return $this;
     }
 
     public function getRowUrl($row)
     {
         return $this->getUrl('*/*/edit', array('vendor_id' => $row->getId()));
     }
-   
 }
