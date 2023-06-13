@@ -18,7 +18,7 @@ class Dp_Vendor_Block_Adminhtml_Vendor_Edit_Tab_Form extends Mage_Adminhtml_Bloc
             'class' => 'required-entry',
             'required' => true,
             'name' => 'vendor[email]',
-        ));
+            ));
 
         $newFieldset = $form->addFieldset(
             'password_fieldset',
