@@ -8,6 +8,16 @@ class Ccc_Category_Adminhtml_CategoryController extends Mage_Adminhtml_Controlle
 	
 	function indexAction()
 	{
+        // echo "<pre>";
+        // $model = Mage::getModel('category/category')->load(2);
+        // $model->name = "xyz";
+        // $model->email = "abc";
+        // $model->save();
+
+
+        // print_r($model->getCollection()->toArray());
+        // die;
+
 	  	$this->_title($this->__('Category'))
              ->_title($this->__('Manage Categories'));
         $this->loadLayout();

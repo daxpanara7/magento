@@ -1,149 +1,113 @@
-<?php
+<?php 
 
-/**
- * 
- */
 class Dax_Dax_Adminhtml_DaxController extends Mage_Adminhtml_Controller_Action
 {
-	
-	function indexAction()
-	{
+	public function indexAction(){
+		$this->loadLayout();
+		$this->_setActiveMenu('dax');
+		$this->_title('Dax Grid');
+		$this->_addContent($this->getLayout()->createBlock('dax/adminhtml_dax'));
+		$this->renderLayout();
+	}
+
+	protected function _initDax()
+    {
+        $this->_title($this->__('Dax'))
+            ->_title($this->__('Manage Daxs'));
+
+        $daxId = (int) $this->getRequest()->getParam('id');
+        $dax   = Mage::getModel('dax/dax')
+            ->setStoreId($this->getRequest()->getParam('store', 0))
+            ->load($daxId);
+
+        if (!$daxId) {
+            if ($setId = (int) $this->getRequest()->getParam('set')) {
+                $dax->setAttributeSetId($setId);
+            }
+        }
+
+        Mage::register('current_dax', $dax);
+        Mage::getSingleton('cms/wysiwyg_config')->setStoreId($this->getRequest()->getParam('store'));
+        return $dax;
+    }
+
+	public function newAction(){
+		$this->_forward('edit');
+	}
+
+	public function editAction(){ 
+		$daxId = (int) $this->getRequest()->getParam('id');
+        $dax   = $this->_initDax();
         
-	  	$this->_title($this->__('Dax'))
-             ->_title($this->__('Manage'));
+        if ($daxId && !$dax->getId()) {
+            $this->_getSession()->addError(Mage::helper('dax')->__('This dax no longer exists.'));
+            $this->_redirect('*/*/');
+            return;
+        }
+
+        $this->_title($dax->getName());
+
         $this->loadLayout();
-        $this->_addContent($this->getLayout()->createBlock('dax/adminhtml_dax'));
+
+        $this->_setActiveMenu('dax/dax');
+
+        $this->getLayout()->getBlock('head')->setCanLoadExtJs(true);
+
         $this->renderLayout();
 	}
 
-    public function newAction()
-    {
-        $this->loadLayout();
-        $this->_setActiveMenu('Dax/items');
-        $this->_addBreadcrumb(Mage::helper('adminhtml')->__('Item Manager'), Mage::helper('adminhtml')->__('Item Manager'));
-        $this->_addBreadcrumb(Mage::helper('adminhtml')->__('Item News'), Mage::helper('adminhtml')->__('Item News'));
-        $this->_addContent($this->getLayout()->createBlock(' dax/adminhtml_dax_edit'))->_addLeft($this->getLayout()->createBlock('dax/adminhtml_dax_edit_tabs'));
-        $this->renderLayout();
-    }
-
-    public function editAction() 
-    {
-        $collection = Mage::getModel('dax/dax')->getCollection()->toArray();
-        print_r($collection);
-
-
-        die;
-        $id = $this->getRequest()->getParam('entity_id');
-        $model = Mage::getModel('dax/dax')->load($id);
-
-        if ($model->getId() || $id == 0) {
-        $data = Mage::getSingleton('adminhtml/session')->getFormData(true);
-        if (!empty($data)) {
-        $model->setData($data);
-        }
-
-        Mage::register('dax_data', $model);
-
-        $this->loadLayout();
-        $this->_setActiveMenu('dax/items');
-
-        $this->_addBreadcrumb(Mage::helper('adminhtml')->__('Item Manager'), Mage::helper('adminhtml')->__('Item Manager'));
-        $this->_addBreadcrumb(Mage::helper('adminhtml')->__('Item News'), Mage::helper('adminhtml')->__('Item News'));
-
-        $this->_addContent($this->getLayout()->createBlock('dax/adminhtml_dax_edit'))
-        ->_addLeft($this->getLayout()
-        ->createBlock('dax/adminhtml_dax_edit_tabs'));
-        $this->renderLayout();
-        } else {
-        Mage::getSingleton('adminhtml/session')->addError(Mage::helper('dax')->__('Item does not exist'));
-        $this->_redirect('*/*/');
-        }
-    }
-
-    public function saveAction()
+	public function saveAction()
     {
         try {
-            $model = Mage::getModel('dax/dax');
-            $data = $this->getRequest()->getPost();
+            $setId = (int) $this->getRequest()->getParam('set');
+            $daxData = $this->getRequest()->getPost('account');            
+            $dax = Mage::getSingleton('dax/dax');
+            $dax->setAttributeSetId($setId);
+
+            if ($daxId = $this->getRequest()->getParam('id')) {
+                if (!$dax->load($daxId)) {
+                    throw new Exception("No Row Found");
+                }
+                Mage::app()->setCurrentStore(Mage_Core_Model_App::ADMIN_STORE_ID);
+            }
             
-            if (!$this->getRequest()->getParam('entity_id'))
-            {
-                $model->setData($data)->setId($this->getRequest()->getParam('entity_id'));
-            }
+            $dax->addData($daxData);
 
-            $model->setData($data)->setId($this->getRequest()->getParam('entity_id'));
+            $dax->save();
 
-            if ($model->getCreatedTime == NULL || $model->getUpdateTime() == NULL)
-            {
-                $model->setCreatedTime(now())->setUpdateTime(now());
-            } 
-            else {
-                $model->setUpdateTime(now());
-            }
-             
-            $model->save();
-            Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('product')->__('Data was successfully saved'));
-            Mage::getSingleton('adminhtml/session')->setFormData(false);
-             
-            if ($this->getRequest()->getParam('back')) {
-                $this->_redirect('*/*/edit', array('entity_id' => $model->getId()));
-                return;
-            }
+            Mage::getSingleton('core/session')->addSuccess("dax data added.");
             $this->_redirect('*/*/');
-            return;
-        } catch (Exception $e) {
-            Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
-            Mage::getSingleton('adminhtml/session')->setFormData($data);
-            $this->_redirect('*/*/edit', array('id' => $this->getRequest()->getParam('entity_id')));
-            return;
-        }
 
-        Mage::getSingleton('adminhtml/session')->addError(Mage::helper('dax')->__('Unable to find Data to save'));
-        $this->_redirect('*/*/');
+        } catch (Exception $e) {
+            Mage::getSingleton('core/session')->addError($e->getMessage());
+            $this->_redirect('*/*/');
+        }
     }
 
     public function deleteAction()
     {
-        if( $this->getRequest()->getParam('entity_id') > 0 ) {
-            try {
-                $model = Mage::getModel('dax/dax');
-                 
-                $model->setId($this->getRequest()->getParam('entity_id'))
-                ->delete();
-                 
-                Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('adminhtml')->__('Data was successfully deleted'));
-                $this->_redirect('*/*/');
-            } catch (Exception $e) {
-                Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
-                $this->_redirect('*/*/edit', array('id' => $this->getRequest()->getParam('entity_id')));
+        try {
+
+            $daxModel = Mage::getModel('dax/dax');
+
+            if (!($daxId = (int) $this->getRequest()->getParam('id')))
+                throw new Exception('Id not found');
+
+            if (!$daxModel->load($daxId)) {
+                throw new Exception('dax does not exist');
             }
+
+            if (!$daxModel->delete()) {
+                throw new Exception('Error in delete record', 1);
+            }
+
+            Mage::getSingleton('core/session')->addSuccess($this->__('The dax has been deleted.'));
+
+        } catch (Exception $e) {
+            Mage::logException($e);
+            $Mage::getSingleton('core/session')->addError($e->getMessage());
         }
+        
         $this->_redirect('*/*/');
     }
-
-    public function massDeleteAction()
-    {
-        $productId = $this->getRequest()->getParam('entity_id');
-        if(!is_array($productId)) {
-            Mage::getSingleton('adminhtml/session')->addError(Mage::helper('dax')->__('Please select tax(es).'));
-        } else {
-            try {
-                $model = Mage::getModel('dax/dax');
-                foreach ($productId as $id) {
-                    $model->load($id)->delete();
-                }
-                
-                Mage::getSingleton('adminhtml/session')->addSuccess(
-                    Mage::helper('dax')->__('Total of %d record(s) were deleted.', count($productId))
-                );
-            } catch (Exception $e) {
-                Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
-            }
-        }
-         
-        $this->_redirect('*/*/index');
-    }
-
-
-
 }

@@ -7,9 +7,6 @@ class Ccc_Product_Block_Adminhtml_Product_Edit extends Mage_Adminhtml_Block_Widg
 		$this->_objectId = 'product_id';
 		$this->_blockGroup = 'product';
 		$this->_controller = 'adminhtml_product';
-
-
-
 		$this->_updateButton('save', 'label', Mage::helper('product')->__('Save'));
 		$this->_updateButton('delete', 'label', Mage::helper('product')->__('Delete'));
 

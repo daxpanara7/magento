@@ -44,13 +44,13 @@ class Ccc_Salesman_Block_Adminhtml_Salesman_Grid extends Mage_Adminhtml_Block_Wi
         $this->addColumn('fname', array(
             'header'    => Mage::helper('salesman')->__('First Name'),
             'align'     => 'left',
-            'index'     => 'fname'
+            'index'     => 'first_name'
         ));
 
         $this->addColumn('lname', array(
             'header'    => Mage::helper('salesman')->__('Last Name'),
             'align'     => 'left',
-            'index'     => 'lname'
+            'index'     => 'last_name'
         ));
 
         $this->addColumn('email', array(

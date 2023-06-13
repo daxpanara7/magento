@@ -39,18 +39,40 @@
             <practice>
                 <class>Ccc_Practice_Helper</class>
             </practice>
+            <practice>
+                  <rewrite>
+                      <data>Ccc_Practice_Helper_NewData</data>
+                  </rewrite>
+            </practice>
         </helpers>
-        
+        <events>
+            <cms_page_prepare_save>
+                <observers>
+                    <Ccc_Practice_Model_Observer>
+                        <type>singleton</type>
+                        <class>Ccc_Practice_Model_Observer</class>
+                        <method>saveCmsPageObserve</method>
+                    </Ccc_Practice_Model_Observer>
+                </observers>
+            </cms_page_prepare_save>
+        </events>
     </global>
     <admin>
         <routers>
-            <product>
+            <practice>
+                <use>admin</use>
+                <args>
+                    <module>Ccc_Practice</module>
+                    <frontName>Practice</frontName>
+                </args>
+            </practice>
+            <!-- <adminhtml>
                 <args>
                     <modules>
-                        <ccc_practice before="Mage_Adminhtml">Ccc_Practice_Adminhtml</ccc_practice>
+                        <ccc_practice before ='Mage_Adminhtml_Catalog'>Ccc_Practice_Adminhtml</ccc_practice>
                     </modules>
                 </args>
-            </product>
+            </adminhtml> -->
         </routers>
   </admin>
   <layout>
