@@ -9,7 +9,7 @@
 <brand_index_view>
     <remove name="right"></remove>
     <reference name="content">
-        <block type="brand/brand" name="brand.brand" template="brand/banner.phtml"/>
+        <block type="brand/brand" name="brand.brand" template="brand/brand_page.phtml"/>
     </reference>
 </brand_index_view>
 </layout>
