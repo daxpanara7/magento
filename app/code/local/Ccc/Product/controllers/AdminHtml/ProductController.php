@@ -15,13 +15,6 @@ class Ccc_Product_Adminhtml_ProductController extends Mage_Adminhtml_Controller_
 
     public function indexAction()
     {
-        // echo '<pre>';
-        // $model = Mage::getModel('product/product')->load(2);
-        // $model->name = 'vijay thakor';
-        // $model->email = 'v@gmial.com';
-        // $model->save();
-        // print_r($model->getCollection()->toArray());
-        // die();
         $this->loadLayout();
         $this->_title($this->__("product Grid"));
         $this->_addContent($this->getLayout()->createBlock('product/adminhtml_product'));
