@@ -69,6 +69,8 @@ require_once $mageFilename;
 if (isset($_SERVER['MAGE_IS_DEVELOPER_MODE'])) {
     Mage::setIsDeveloperMode(true);
 }
+error_reporting(E_ALL ^ E_DEPRECATED);
+ini_set('display_errors', 1);
 
 #ini_set('display_errors', 1);
 

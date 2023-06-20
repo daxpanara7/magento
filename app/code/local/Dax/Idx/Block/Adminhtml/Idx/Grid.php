@@ -72,10 +72,10 @@ class Dax_Idx_Block_Adminhtml_Idx_Grid extends Mage_Adminhtml_Block_Widget_Grid
             'index'     => 'cost'
         ));
 
-        $this->addColumn('quntity', array(
-            'header'    => Mage::helper('idx')->__('Quntity'),
+        $this->addColumn('quantity', array(
+            'header'    => Mage::helper('idx')->__('Quantity'),
             'align'     => 'left',
-            'index'     => 'quntity'
+            'index'     => 'quantity'
         ));
 
         $this->addColumn('brand', array(
