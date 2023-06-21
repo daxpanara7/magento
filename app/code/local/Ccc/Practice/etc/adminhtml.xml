@@ -10,6 +10,7 @@
                     <action>practice/Adminhtml_First/index</action>
                     <sort_order>0</sort_order>
                 </manage>
+
                 <first translate="title" module="practice">
                     <title>Task 1</title>
                     <action>practice/Adminhtml_Query/first</action>
@@ -80,7 +81,6 @@
                     <action>practice/Adminhtml_Query/fourteenth</action>
                     <sort_order>0</sort_order>
                 </fourteen>
-
             </children>
          </practice>
     </menu>

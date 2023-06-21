@@ -1,24 +1,15 @@
 <config>
     <modules>
-        <Ccc_Salesman>
-            <version>0.3.0</version>                
+        <Ccc_Salesman>    
+            <version>1.1.0</version>
         </Ccc_Salesman>
     </modules>
     <frontend>
-        <routers>
-            <salesman>
-                <use>standard</use>
-                <args>
-                    <module>Ccc_Salesman</module>
-                    <frontName>salesman</frontName>
-                </args>
-            </salesman>
-        </routers>
         <layout>
             <updates>
-                <salesman>
-                    <file>salesman.xml</file>
-                </salesman>
+                <Salesman module="Ccc_Salesman">
+                    <file>Ccc_Salesman.xml</file>
+                </Salesman>
             </updates>
         </layout>
     </frontend>
@@ -42,7 +33,7 @@
                     <use>core_read</use>
                 </connection>
             </salesman_read>
-        </resources>
+        </resources>        
         <models>
             <salesman>
                 <class>Ccc_Salesman_Model</class>
@@ -60,7 +51,7 @@
                     </salesman_address>
                     <salesman_price>
                         <table>salesman_price</table>
-                    </salesman_price>  
+                    </salesman_price>
                 </entities>
             </salesman_resource>
         </models>
@@ -70,22 +61,27 @@
             </salesman>
         </blocks>
         <helpers>
-            <salesman>
-                <class>Ccc_Salesman_Helper</class>
+           <salesman>
+                  <class>Ccc_salesman_Helper</class>
             </salesman>
         </helpers>
-        
     </global>
     <admin>
         <routers>
-            <adminhtml>
+            <Salesman>
+                <use>admin</use>
                 <args>
-                    <modules>
-                        <ccc_salesman before="Mage_Adminhtml">Ccc_Salesman_Adminhtml</ccc_salesman>
-                    </modules>
+                    <module>Ccc_Salesman</module>
+                    <frontName>salesman</frontName>
                 </args>
-            </adminhtml>
+            </Salesman>
         </routers>
-  </admin>
-  
+         <layout>
+            <updates>
+                <salesman>
+                    <file>salesman.xml</file>
+                </salesman>
+            </updates>
+        </layout>
+    </admin>
 </config>

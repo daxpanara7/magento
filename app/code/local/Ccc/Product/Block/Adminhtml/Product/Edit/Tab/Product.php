@@ -55,27 +55,21 @@ class Ccc_Product_Block_Adminhtml_Product_Edit_Tab_Product extends Mage_Adminhtm
             ),
         ));
 
-        $fieldset->addField('color', 'select', array(
+        $fieldset->addField('color', 'text', array(
             'label'     => Mage::helper('product')->__('Color'),
             'title'     => Mage::helper('product')->__('Color'),
             'name'      => 'product[color]',
             'required'  => true,
-            'options'   => array(
-                '1' => Mage::helper('product')->__('Color1'),
-                '2' => Mage::helper('product')->__('Color2'),
             ),
-        ));
+        );
 
-        $fieldset->addField('material', 'select', array(
+        $fieldset->addField('material', 'text', array(
             'label'     => Mage::helper('product')->__('Material'),
             'title'     => Mage::helper('product')->__('Material'),
             'name'      => 'product[material]',
             'required'  => true,
-            'options'   => array(
-                '1' => Mage::helper('product')->__('Material1'),
-                '2' => Mage::helper('product')->__('Material2'),
             ),
-        ));
+        );
 
         $this->setForm($form);
         $form->setValues($model->getData());

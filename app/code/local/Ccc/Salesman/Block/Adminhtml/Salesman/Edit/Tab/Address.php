@@ -1,48 +1,52 @@
 <?php
-
 class Ccc_Salesman_Block_Adminhtml_Salesman_Edit_Tab_Address extends Mage_Adminhtml_Block_Widget_Form
 {
-    protected function _prepareForm()
-    {
-        $model = Mage::registry('salesman_address_data');
-        $form = new Varien_Data_Form();
-        $fieldset = $form->addFieldset('salesman_address_form',array('legend'=>Mage::helper('salesman')->__('Salesman Address information')));
+	protected function _prepareForm()
+	{
+		$form = new Varien_Data_Form();
+		$this->setForm($form);
+		$salesmanField = $form->addFieldset('salesman_form',array('legend'=>Mage::helper('salesman')->__('Salesman Address information')));
 
-        $fieldset->addField('address', 'text', array(
-            'name'      => 'address[address]',
-            'label'     => Mage::helper('salesman')->__('Address'),
-            'required'  => true,
-        ));
 
-        $fieldset->addField('city', 'text', array(
-            'name'      => 'address[city]',
-            'label'     => Mage::helper('salesman')->__('City'),
-            'required'  => true,
-        ));
+		$salesmanField->addField('address', 'text', array(
+            'label' => Mage::helper('salesman')->__('Address'),
+            'required' => true,
+            'name' => 'salesman_address[address]',
+		));
 
-        $fieldset->addField('state', 'text', array(
-            'name'      => 'address[state]',
-            'label'     => Mage::helper('salesman')->__('State'),
-            'required'  => true,
-        ));
+		$salesmanField->addField('city', 'text', array(
+            'label' => Mage::helper('salesman')->__('City'),
+            'required' => true,
+            'name' => 'salesman_address[city]',
+		));
 
-        $fieldset->addField('country', 'text', array(
-            'name'      => 'address[country]',
-            'label'     => Mage::helper('salesman')->__('Country'),
-            'required'  => true,
-        ));
+		$salesmanField->addField('state', 'text', array(
+            'label' => Mage::helper('salesman')->__('State'),
+            'required' => true,
+            'name' => 'salesman_address[state]',
+		));
 
-        $fieldset->addField('zip_code', 'text', array(
-            'name'      => 'address[zip_code]',
-            'label'     => Mage::helper('salesman')->__('Zip Code'),
-            'required'  => true,
-        ));
+		$salesmanField->addField('country', 'text', array(
+            'label' => Mage::helper('salesman')->__('Country'),
+            'required' => true,
+            'name' => 'salesman_address[country]',
+		));
 
-       
+		$salesmanField->addField('zipcode', 'text', array(
+            'label' => Mage::helper('salesman')->__('Zipcode'),
+            'required' => true,
+            'name' => 'salesman_address[zipcode]',
+		));
 
-        $this->setForm($form);
-        $form->setValues($model->getData());
-
-        return parent::_prepareForm();
-    }
+		if ( Mage::getSingleton('adminhtml/session')->getsalesmanData() )
+		{
+			$form->setValues(Mage::getSingleton('adminhtml/session')->getsalesmanData());
+			Mage::getSingleton('adminhtml/session')->setsalesmanData(null);
+		} 
+		elseif ( Mage::registry('address_data') ) 
+		{
+			$form->setValues(Mage::registry('address_data')->getData());
+		}
+		return parent::_prepareForm();
+	}
 }

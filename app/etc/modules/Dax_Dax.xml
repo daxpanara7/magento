@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <Dax_Dax>
+            <active>true</active>
+            <codePool>local</codePool>            
+        </Dax_Dax>
+    </modules>
+</config>

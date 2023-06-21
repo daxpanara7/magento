@@ -271,26 +271,7 @@ class Ccc_Practice_Adminhtml_QueryController extends Mage_Adminhtml_Controller_A
             ))
             ->group('oi.product_id');
 
-        // echo $select;
-
-        // $query = $select->__toString();
-
-        // $results = $readConnection->fetchAll($query);
-
-        // $productData = array();
-        // foreach ($results as $result) {
-        //     $productId = $result['product_id'];
-        //     $sku = $result['sku'];
-        //     $soldQuantity = $result['sold_quantity'];
-
-        //     $productData[] = array(
-        //         'product_id' => $productId,
-        //         'sku' => $sku,
-        //         'sold_quantity' => $soldQuantity
-        //     );
-        // }
-        // echo "<pre>";
-        // print_r($productData);
+       
     }
 
     public function ninthAction()
@@ -382,5 +363,8 @@ class Ccc_Practice_Adminhtml_QueryController extends Mage_Adminhtml_Controller_A
         )
         ->where('avc.value IS NOT NULL OR avi.value IS NOT NULL OR avd.value IS NOT NULL OR avt.value IS NOT NULL')
         ->where('a.is_user_defined = ?', 1);
+
+
+
     }
 }
