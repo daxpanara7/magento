@@ -1,8 +1,13 @@
+<?xml version="1.0"?>
 <config>
     <modules>
         <Ccc_Practice>
             <active>true</active>
-            <codePool>local</codePool>            
+            <codePool>local</codePool>
+        </Ccc_Practice>
+    </modules>
+</config>
+        <codePool>local</codePool>            
         </Ccc_Practice>
     </modules>
 </config>
