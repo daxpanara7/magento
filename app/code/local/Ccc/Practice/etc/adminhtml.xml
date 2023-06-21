@@ -60,6 +60,27 @@
                     <action>practice/Adminhtml_Query/tenth</action>
                     <sort_order>0</sort_order>
                 </ten>
+                <eleven translate="title" module="practice">
+                    <title>Task 11</title>
+                    <action>practice/Adminhtml_Query/eleventh</action>
+                    <sort_order>0</sort_order>
+                </eleven>
+                <twelve translate="title" module="practice">
+                    <title>Task 12</title>
+                    <action>practice/Adminhtml_Query/twelveth</action>
+                    <sort_order>0</sort_order>
+                </twelve>
+                <thriteen translate="title" module="practice">
+                    <title>Task 13</title>
+                    <action>practice/Adminhtml_Query/thriteenth</action>
+                    <sort_order>0</sort_order>
+                </thriteen>
+                <fourteen translate="title" module="practice">
+                    <title>Task 14</title>
+                    <action>practice/Adminhtml_Query/fourteenth</action>
+                    <sort_order>0</sort_order>
+                </fourteen>
+
             </children>
          </practice>
     </menu>
