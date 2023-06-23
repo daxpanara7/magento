@@ -1,22 +1,21 @@
 <?php
-
 class Ccc_Practice_Adminhtml_QueryController extends Mage_Adminhtml_Controller_Action
 {
     public function firstAction()
     {
+        // Need a list of product with these columns product name, sku, cost, price, color.
         $this->loadLayout();
-        $block = $this->getLayout()->createBlock('Ccc_Practice_Block_Adminhtml_First');
-        $this->_addContent($block);
+        $this->_addContent($this->getLayout()->createBlock('practice/adminhtml_first'));
         $this->renderLayout();
     }
+
     public function firstQueryAction()
     {
         $resource = Mage::getSingleton('core/resource');
         $readConnection = $resource->getConnection('core_read');
 
-        $tableName = $resource->getTableName('catalog/product');//catalog_product_entity
-        echo "<pre>";
-        echo $select = $readConnection->select()
+        $tableName = $resource->getTableName('catalog/product');
+        $select = $readConnection->select()
             ->from(array('p' => $tableName), array(
                 'sku' => 'p.sku',
                 'name' => 'pv.value',
@@ -27,69 +26,75 @@ class Ccc_Practice_Adminhtml_QueryController extends Mage_Adminhtml_Controller_A
             ->joinLeft(
                 array('pv' => $resource->getTableName('catalog_product_entity_varchar')),
                 'pv.entity_id = p.entity_id AND pv.attribute_id = 73',
-                
+                array()
             )
             ->joinLeft(
                 array('pdc' => $resource->getTableName('catalog_product_entity_decimal')),
                 'pdc.entity_id = p.entity_id AND pdc.attribute_id = 81',
-                
+                array()
             )
             ->joinLeft(
                 array('pdp' => $resource->getTableName('catalog_product_entity_decimal')),
                 'pdp.entity_id = p.entity_id AND pdp.attribute_id = 77',
-                
+                array()
             )
             ->joinLeft(
                 array('pi' => $resource->getTableName('catalog_product_entity_int')),
                 'pi.entity_id = p.entity_id AND pi.attribute_id = 94',
-                
+                array()
             );
+
+        echo $select;
     }
+
     public function secondAction()
     {
+        // Need a list of attribute & options. return an array with attribute id, attribute code, option Id, option name.
         $this->loadLayout();
-        $block = $this->getLayout()->createBlock('Ccc_Practice_Block_Adminhtml_Second');
-        $this->_addContent($block);
+        $this->_addContent($this->getLayout()->createBlock('practice/adminhtml_second'));
         $this->renderLayout();
     }
 
     public function secondQueryAction()
     {
-    	$attributeOptions = [];
+        $attributeOptions = [];
+
         $resource = Mage::getSingleton('core/resource');
         $readConnection = $resource->getConnection('core_read');
 
         $attributeOptionTable = $resource->getTableName('eav_attribute_option');
         $attributeTable = $resource->getTableName('eav_attribute');
 
-        echo "<pre>";
-        echo $select = $readConnection->select()
+        $select = $readConnection->select()
             ->from(
                 array('ao' => $attributeOptionTable),
                 array(
                     'attribute_id' => 'ao.attribute_id',
                     'option_id' => 'ao.option_id',
-                    'option_name' => 'ov.value',
                 )
             )
-            ->joinLeft(
+            ->join(
                 array('ov' => $resource->getTableName('eav_attribute_option_value')),
                 'ov.option_id = ao.option_id',
-                array()
+                array('option_name' => 'ov.value')
             )
             ->join(
                 array('a' => $attributeTable),
                 'a.attribute_id = ao.attribute_id',
                 array('attribute_code' => 'a.attribute_code')
             );
-	}
-	public function thirdAction()
+
+        echo $select;
+    }
+
+    public function thirdAction()
     {
+        // Need a list of attribute having options count greater than 10. return array with attribute id, attribute code, option count.
         $this->loadLayout();
-        $block = $this->getLayout()->createBlock('Ccc_Practice_Block_Adminhtml_Third');
-        $this->_addContent($block);
+        $this->_addContent($this->getLayout()->createBlock('practice/adminhtml_third'));
         $this->renderLayout();
     }
+
     public function thirdQueryAction()
     {
         $resource = Mage::getSingleton('core/resource');
@@ -97,66 +102,68 @@ class Ccc_Practice_Adminhtml_QueryController extends Mage_Adminhtml_Controller_A
 
         $attributeOptionTable = $resource->getTableName('eav_attribute_option');
         $attributeTable = $resource->getTableName('eav_attribute');
-        echo "<pre>";
-        echo $select = $readConnection->select()
+
+        $select = $readConnection->select()
             ->from(
-                array('DD' => $attributeTable),
+                array('main_table' => $attributeTable),
                 array(
-                    'attribute_id' => 'DD.attribute_id',
-                    'attribute_code' => 'DD.attribute_code',
+                    'attribute_id' => 'main_table.attribute_id',
+                    'attribute_code' => 'main_table.attribute_code',
                 )
             )
             ->joinLeft(
                 array('option_count_table' => $attributeOptionTable),
-                'option_count_table.attribute_id = DD.attribute_id',
+                'option_count_table.attribute_id = main_table.attribute_id',
                 array(
                     'option_count' => 'COUNT(option_count_table.option_id)',
                 )
             )
-            ->group('DD.attribute_id')
-            ->having('COUNT(option_count_table.option_id) > 10', 1);
+            ->group('main_table.attribute_id')
+            ->having('COUNT(option_count_table.option_id) > 1', 1);
 
+        echo $select;
     }
 
     public function fourthAction()
     {
+        // Need list of product with assigned images. return an array with product Id, sku, base image, thumb image, small image.
         $this->loadLayout();
-        $block = $this->getLayout()->createBlock('Ccc_Practice_Block_Adminhtml_Fourth');
-        $this->_addContent($block);
+        $this->_addContent($this->getLayout()->createBlock('practice/adminhtml_fourth'));
         $this->renderLayout();
     }
+
     public function fourthQueryAction()
     {
         $resource = Mage::getSingleton('core/resource');
         $readConnection = $resource->getConnection('core_read');
-        echo "<pre>";
+
         echo $select = $readConnection->select()
             ->from(
-                array('DD'=> $resource->getTableName('catalog_product_entity')),
+                array('main_table'=> $resource->getTableName('catalog_product_entity')),
                 array('entity_id','sku')
             )
             ->joinLeft(
-                array('DJ'=>$resource->getTableName('catalog_product_entity_varchar')),
-                'DJ.entity_id = DD.entity_id AND DJ.attribute_id = 87',
-                array('image' => 'DJ.value')
+                array('vc'=>$resource->getTableName('catalog_product_entity_varchar')),
+                'vc.entity_id = main_table.entity_id AND vc.attribute_id = 87',
+                array('image' => 'vc.value')
             )
             ->joinLeft(
                 array('thumb'=>$resource->getTableName('catalog_product_entity_varchar')),
-                'thumb.entity_id = DD.entity_id AND thumb.attribute_id = 89',
+                'thumb.entity_id = main_table.entity_id AND thumb.attribute_id = 89',
                 array('thumbnail' => 'thumb.value')
             )
             ->joinLeft(
                 array('small'=>$resource->getTableName('catalog_product_entity_varchar')),
-                'small.entity_id = DD.entity_id AND small.attribute_id = 88',
+                'small.entity_id = main_table.entity_id AND small.attribute_id = 88',
                 array('small' => 'small.value')
             );
     }
 
     public function fifthAction()
     {
+        // Need list of product with gallery image count. return an array with product sku, gallery images count, without consideration of thumb, small, base.
         $this->loadLayout();
-        $block = $this->getLayout()->createBlock('Ccc_Practice_Block_Adminhtml_Fifth');
-        $this->_addContent($block);
+        $this->_addContent($this->getLayout()->createBlock('practice/adminhtml_fifth'));
         $this->renderLayout();
     }
 
@@ -164,39 +171,39 @@ class Ccc_Practice_Adminhtml_QueryController extends Mage_Adminhtml_Controller_A
     {
         $resource = Mage::getSingleton('core/resource');
         $readConnection = $resource->getConnection('core_read');
-        echo "<pre>";
         echo $select = $readConnection->select()
             ->from(
-                array('DD'=> $resource->getTableName('catalog_product_entity')),
+                array('main_table'=> $resource->getTableName('catalog_product_entity')),
                 array('entity_id','sku')
             )
             ->joinLeft(
                 array('m'=>$resource->getTableName('catalog/product_attribute_media_gallery')),
-                'm.entity_id = DD.entity_id',
+                'm.entity_id = main_table.entity_id',
                 array('image' => 'COUNT(m.value)')
             )
-            ->group('DD.entity_id');
+            ->group('main_table.entity_id');
     }
+
     public function sixthAction()
     {
+        // Need list of top to bottom customers with their total order counts. return an array with customer id, customer name, customer email, order count.
         $this->loadLayout();
-        $block = $this->getLayout()->createBlock('Ccc_Practice_Block_Adminhtml_Sixth');
-        $this->_addContent($block);
+        $this->_addContent($this->getLayout()->createBlock('practice/adminhtml_sixth'));
         $this->renderLayout();
     }
+
     public function sixthQueryAction()
     {
         $resource = Mage::getSingleton('core/resource');
         $readConnection = $resource->getConnection('core_read');
-        echo "<pre>";
         echo $select = $readConnection->select()
             ->from(
-                array('DD'=> $resource->getTableName('customer_entity')),
+                array('main_table'=> $resource->getTableName('customer_entity')),
                 array('entity_id','email')
             )
             ->joinLeft(
                 array('e'=>$resource->getTableName('customer_entity_varchar')),
-                'e.entity_id = DD.entity_id AND e.attribute_id = 5',
+                'e.entity_id = main_table.entity_id AND e.attribute_id = 5',
                 array('firstname' => 'e.value')
             )
             ->joinLeft(
@@ -204,28 +211,29 @@ class Ccc_Practice_Adminhtml_QueryController extends Mage_Adminhtml_Controller_A
                 'o.customer_id = e.entity_id',
                 array('order_count' => 'COUNT(o.entity_id)')
             )
-            ->group('DD.entity_id');
+            ->group('main_table.entity_id');
     }
-    public function sevenAction()
+
+    public function seventhAction()
     {
+        // Need list of top to bottom customers with their total order counts, order status wise. return an array with customer id, customer name, customer email, status, order count.
         $this->loadLayout();
-        $block = $this->getLayout()->createBlock('Ccc_Practice_Block_Adminhtml_Seven');
-        $this->_addContent($block);
+        $this->_addContent($this->getLayout()->createBlock('practice/adminhtml_seventh'));
         $this->renderLayout();
     }
-    public function sevenQueryAction()
+
+    public function seventhQueryAction()
     {
         $resource = Mage::getSingleton('core/resource');
         $readConnection = $resource->getConnection('core_read');
-        echo "<pre>";
         echo $select = $readConnection->select()
             ->from(
-                array('DD'=> $resource->getTableName('customer_entity')),
+                array('main_table'=> $resource->getTableName('customer_entity')),
                 array('entity_id','email')
             )
             ->joinLeft(
                 array('e'=>$resource->getTableName('customer_entity_varchar')),
-                'e.entity_id = DD.entity_id AND e.attribute_id = 5',
+                'e.entity_id = main_table.entity_id AND e.attribute_id = 5',
                 array('firstname' => 'e.value')
             )
             ->joinLeft(
@@ -238,21 +246,23 @@ class Ccc_Practice_Adminhtml_QueryController extends Mage_Adminhtml_Controller_A
                 'o.status = s.status',
                 array('order_status' => 's.label')
             )
-            ->group('DD.entity_id');
+            ->group('main_table.entity_id');
     }
+
     public function eightAction()
     {
+        // Need list product with number of quantity sold till now for each. return an array with product id, sku, sold quantity.
         $this->loadLayout();
-        $block = $this->getLayout()->createBlock('Ccc_Practice_Block_Adminhtml_Eight');
-        $this->_addContent($block);
+        $this->_addContent($this->getLayout()->createBlock('practice/adminhtml_eight'));
         $this->renderLayout();
     }
+
     public function eightQueryAction()
     {
         $resource = Mage::getSingleton('core/resource');
         $readConnection = $resource->getConnection('core_read');
-        echo "<pre>";
-        echo $select = $readConnection->select()
+
+        $select = $readConnection->select()
             ->from(array('oi' => $resource->getTableName('sales/order_item')), array())
             ->columns(array(
                 'product_id' => 'oi.product_id',
@@ -261,20 +271,22 @@ class Ccc_Practice_Adminhtml_QueryController extends Mage_Adminhtml_Controller_A
             ))
             ->group('oi.product_id');
 
+       
     }
-    public function nineAction()
+
+    public function ninthAction()
     {
+        // Need list of those attributes for whose value is not assigned to product. return an array result product wise with these columns product Id, sku, attribute Id, attribute code.
         $this->loadLayout();
-        $block = $this->getLayout()->createBlock('Ccc_Practice_Block_Adminhtml_Nine');
-        $this->_addContent($block);
+        $this->_addContent($this->getLayout()->createBlock('practice/adminhtml_ninth'));
         $this->renderLayout();
     }
-    public function nineQueryAction()
+
+    public function ninthQueryAction()
     {
         $connection = Mage::getSingleton('core/resource')->getConnection('core_read');
         $tablePrefix = Mage::getConfig()->getTablePrefix();
 
-        echo "<pre>";
         echo $select = $connection->select()
         ->from(array('e' => 'catalog_product_entity'), 'entity_id AS product_id')
         ->join(
@@ -306,18 +318,19 @@ class Ccc_Practice_Adminhtml_QueryController extends Mage_Adminhtml_Controller_A
         ->where('a.is_user_defined = ?', 1);
     }
 
-    public function tenAction()
+    public function tenthAction()
     {
+        // Need list of those attributes for whose value is not assigned to product. return an array result product wise with these columns product Id, sku, attribute Id, attribute code, value.
         $this->loadLayout();
-        $block = $this->getLayout()->createBlock('Ccc_Practice_Block_Adminhtml_Ten');
-        $this->_addContent($block);
+        $this->_addContent($this->getLayout()->createBlock('practice/adminhtml_tenth'));
         $this->renderLayout();
     }
-    public function tenQueryAction()
+
+    public function tenthQueryAction()
     {
         $connection = Mage::getSingleton('core/resource')->getConnection('core_read');
         $tablePrefix = Mage::getConfig()->getTablePrefix();
-        echo "<pre>";
+
         echo $select = $connection->select()
         ->from(
             array('e' => 'catalog_product_entity'),
@@ -350,11 +363,8 @@ class Ccc_Practice_Adminhtml_QueryController extends Mage_Adminhtml_Controller_A
         )
         ->where('avc.value IS NOT NULL OR avi.value IS NOT NULL OR avd.value IS NOT NULL OR avt.value IS NOT NULL')
         ->where('a.is_user_defined = ?', 1);
+
+
+
     }
-
-
-
-
 }
-
-?>

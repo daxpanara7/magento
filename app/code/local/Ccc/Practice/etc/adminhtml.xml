@@ -10,7 +10,6 @@
                     <action>practice/Adminhtml_First/index</action>
                     <sort_order>0</sort_order>
                 </manage>
-
                 <first translate="title" module="practice">
                     <title>Task 1</title>
                     <action>practice/Adminhtml_Query/first</action>
@@ -43,7 +42,7 @@
                 </six>
                  <seven translate="title" module="practice">
                     <title>Task 7</title>
-                    <action>practice/Adminhtml_Query/seventh</action>
+                    <action>practice/Adminhtml_Query/seven</action>
                     <sort_order>0</sort_order>
                 </seven>
                  <eight translate="title" module="practice">
@@ -53,34 +52,50 @@
                 </eight>
                 <nine translate="title" module="practice">
                     <title>Task 9</title>
-                    <action>practice/Adminhtml_Query/ninth</action>
+                    <action>practice/Adminhtml_Query/nine</action>
                     <sort_order>0</sort_order>
                 </nine>
                 <ten translate="title" module="practice">
                     <title>Task 10</title>
-                    <action>practice/Adminhtml_Query/tenth</action>
+                    <action>practice/Adminhtml_Query/ten</action>
                     <sort_order>0</sort_order>
                 </ten>
-                <eleven translate="title" module="practice">
-                    <title>Task 11</title>
-                    <action>practice/Adminhtml_Query/eleventh</action>
+                <csv translate="title" module="practice">
+                    <title>CSV</title>
+                    <action>practice/Adminhtml_Csv/index</action>
                     <sort_order>0</sort_order>
-                </eleven>
-                <twelve translate="title" module="practice">
-                    <title>Task 12</title>
-                    <action>practice/Adminhtml_Query/twelveth</action>
-                    <sort_order>0</sort_order>
-                </twelve>
-                <thriteen translate="title" module="practice">
-                    <title>Task 13</title>
-                    <action>practice/Adminhtml_Query/thriteenth</action>
-                    <sort_order>0</sort_order>
-                </thriteen>
-                <fourteen translate="title" module="practice">
-                    <title>Task 14</title>
-                    <action>practice/Adminhtml_Query/fourteenth</action>
-                    <sort_order>0</sort_order>
-                </fourteen>
+                </csv>
+                <csvZ translate="title" module="practice">
+                    <title>CSVZip</title>
+                    <children>
+                            <csv1 translate="title" module="practice">
+                                <title>AO-sort</title>
+                                <action>practice/Adminhtml_Csv1/run</action>
+                                <sort_order>0</sort_order>
+                            </csv1>
+                            <csv2 translate="title" module="practice">
+                                <title>CA_AO-MAP</title>
+                                <action>practice/Adminhtml_Csv2/run</action>
+                                <sort_order>0</sort_order>
+                            </csv2>
+                            <csv3 translate="title" module="practice">
+                                <title>CATEGORIE_AO_SO</title>  
+                                <action>practice/Adminhtml_Csv3/run</action>
+                                <sort_order>0</sort_order>
+                            </csv3>
+                            <csv4 translate="title" module="practice">
+                                <title>CATEGORIE_AO_COMMON</title>
+                                <action>practice/Adminhtml_Csv4/run</action>
+                                <sort_order>0</sort_order>
+                            </csv4>
+                            <csv5 translate="title" module="practice">
+                                <title>csv5</title>
+                                <action>practice/Adminhtml_Csv5/run</action>
+                                <sort_order>0</sort_order>
+                            </csv5>
+                            
+                    </children>
+                </csvZ>
             </children>
          </practice>
     </menu>
