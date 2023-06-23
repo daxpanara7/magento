@@ -5,6 +5,10 @@ class Ccc_Practice_Block_Adminhtml_Second_Grid extends Mage_Adminhtml_Block_Widg
     {
         parent::__construct();
         $this->setId('practiceAdminhtmlPracticeGrid');
+        $this->setDefaultSort('attribute_id');
+        $this->setDefaultDir('ASC');
+    }
+    
         $this->setDefaultSort('name');
         $this->setDefaultDir('ASC');
     }
