@@ -1,19 +1,18 @@
+<?xml version="1.0" ?>
 <config>
     <modules>
-        <Ccc_Product>
-            <version>1.0.0.0</version>                
+        <Ccc_Product>    
+            <version>1.0.0</version>
         </Ccc_Product>
     </modules>
-    <frontend>
-        <routers>
-            <product>
-                <use>standard</use>
-                <args>
-                    <module>Ccc_Product</module>
-                    <frontName>product</frontName>
-                </args>
-            </product>
-        </routers>
+    <frontend>        
+        <layout>
+            <updates>
+                <Product module="Ccc_Product">
+                    <file>Ccc_Product.xml</file>
+                </Product>
+            </updates>
+        </layout>
     </frontend>
     <global>
         <resources>
@@ -43,6 +42,7 @@
             </product>
             <product_resource>
                 <class>Ccc_Product_Model_Resource</class>
+                <deprecatedNode>product_mysql4</deprecatedNode>
                 <entities>
                     <product>
                         <table>product</table>
@@ -50,53 +50,42 @@
                 </entities>
             </product_resource>
         </models>
-        <!-- <resources>
-             <product_setup>
-                 <setup>
-                 <module>Ccc_Product</module>
-                 </setup>
-             </product_setup>
-
-        <product_write>
-            <connection>
-                <use>core_write</use>
-            </connection>
-        </product_write>
-
-        <product_read>
-            <connection>
-                <use>core_read</use>
-            </connection>
-        </product_read>
-         </resources> -->
         <blocks>
             <product>
                 <class>Ccc_Product_Block</class>
             </product>
         </blocks>
         <helpers>
-            <product>
-                <class>Ccc_Product_Helper</class>
+           <product>
+                  <class>Ccc_product_Helper</class>
             </product>
         </helpers>
-        
     </global>
     <admin>
-        <routers>
+        <!-- <routers>
             <adminhtml>
                 <args>
                     <modules>
-                        <ccc_product before="Mage_Adminhtml">Ccc_Product_Adminhtml</ccc_product>
+                        <Ccc_product>Ccc_product_Adminhtml</Ccc_product>
                     </modules>
                 </args>
             </adminhtml>
+        </routers> -->
+        <routers>
+            <Product>
+                <use>admin</use>
+                <args>
+                    <module>Ccc_Product</module>
+                    <frontName>product</frontName>
+                </args>
+            </Product>
         </routers>
-  </admin>
-  <layout>
-      <updates>
-        <product>
-          <file>product.xml</file>
-        </product>
-      </updates>
-    </layout>
+         <layout>
+            <updates>
+                <product>
+                    <file>product.xml</file>
+                </product>
+            </updates>
+        </layout>
+    </admin>
 </config>

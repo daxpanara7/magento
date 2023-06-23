@@ -1,48 +1,52 @@
 <?php
-
 class Ccc_Vendor_Block_Adminhtml_Vendor_Edit_Tab_Address extends Mage_Adminhtml_Block_Widget_Form
 {
-    protected function _prepareForm()
-    {
-        $model = Mage::registry('vendor_address_data');
-        $form = new Varien_Data_Form();
-        $fieldset = $form->addFieldset('vendor_address_form',array('legend'=>Mage::helper('vendor')->__('Vendor Address information')));
+	protected function _prepareForm()
+	{
+		$form = new Varien_Data_Form();
+		$this->setForm($form);
+		$vendorField = $form->addFieldset('vendor_form',array('legend'=>Mage::helper('vendor')->__('Vendor Address information')));
 
-        $fieldset->addField('address', 'text', array(
-            'name'      => 'address[address]',
-            'label'     => Mage::helper('vendor')->__('Address'),
-            'required'  => true,
-        ));
 
-        $fieldset->addField('city', 'text', array(
-            'name'      => 'address[city]',
-            'label'     => Mage::helper('vendor')->__('City'),
-            'required'  => true,
-        ));
+		$vendorField->addField('address', 'text', array(
+            'label' => Mage::helper('vendor')->__('Address'),
+            'required' => true,
+            'name' => 'vendor_address[address]',
+		));
 
-        $fieldset->addField('state', 'text', array(
-            'name'      => 'address[state]',
-            'label'     => Mage::helper('vendor')->__('State'),
-            'required'  => true,
-        ));
+		$vendorField->addField('city', 'text', array(
+            'label' => Mage::helper('vendor')->__('City'),
+            'required' => true,
+            'name' => 'vendor_address[city]',
+		));
 
-        $fieldset->addField('country', 'text', array(
-            'name'      => 'address[country]',
-            'label'     => Mage::helper('vendor')->__('Country'),
-            'required'  => true,
-        ));
+		$vendorField->addField('state', 'text', array(
+            'label' => Mage::helper('vendor')->__('State'),
+            'required' => true,
+            'name' => 'vendor_address[state]',
+		));
 
-        $fieldset->addField('zip_code', 'text', array(
-            'name'      => 'address[zip_code]',
-            'label'     => Mage::helper('vendor')->__('zip code'),
-            'required'  => true,
-        ));
+		$vendorField->addField('country', 'text', array(
+            'label' => Mage::helper('vendor')->__('Country'),
+            'required' => true,
+            'name' => 'vendor_address[country]',
+		));
 
-       
+		$vendorField->addField('zipcode', 'text', array(
+            'label' => Mage::helper('vendor')->__('Zipcode'),
+            'required' => true,
+            'name' => 'vendor_address[zipcode]',
+		));
 
-        $this->setForm($form);
-        $form->setValues($model->getData());
-
-        return parent::_prepareForm();
-    }
+		if ( Mage::getSingleton('adminhtml/session')->getsalesmanData() )
+		{
+			$form->setValues(Mage::getSingleton('adminhtml/session')->getsalesmanData());
+			Mage::getSingleton('adminhtml/session')->setsalesmanData(null);
+		} 
+		elseif ( Mage::registry('address_data') ) 
+		{
+			$form->setValues(Mage::registry('address_data')->getData());
+		}
+		return parent::_prepareForm();
+	}
 }

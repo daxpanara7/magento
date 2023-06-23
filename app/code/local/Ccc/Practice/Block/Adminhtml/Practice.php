@@ -1,4 +1,5 @@
 <?php
+ 
 class Ccc_Practice_Block_Adminhtml_Practice extends Mage_Adminhtml_Block_Widget_Grid_Container
 {
     public function __construct()
@@ -21,4 +22,8 @@ class Ccc_Practice_Block_Adminhtml_Practice extends Mage_Adminhtml_Block_Widget_
         return Mage::getSingleton('admin/session')->isAllowed('practice/adminhtml_practice/' . $action);
     }
 
+        $this->_headerText = Mage::helper('practice')->__('Manage Practices');
+        $this->_addButtonLabel = Mage::helper('practice')->__('Add New practice');
+        parent::__construct();
+    }
 }

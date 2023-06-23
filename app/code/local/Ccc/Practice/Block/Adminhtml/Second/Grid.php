@@ -9,6 +9,12 @@ class Ccc_Practice_Block_Adminhtml_Second_Grid extends Mage_Adminhtml_Block_Widg
         $this->setDefaultDir('ASC');
     }
     
+        $this->setDefaultSort('name');
+        $this->setDefaultDir('ASC');
+    }
+    
+
+   
     protected function _prepareCollection()
     {
         $attributes = Mage::getModel('eav/entity_attribute')->getCollection();

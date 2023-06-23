@@ -35,6 +35,24 @@
                 </connection>
             </practice_read>
         </resources>
+<config>
+    <modules>
+        <Ccc_Practice>
+            <version>1.0.0.0</version>                
+        </Ccc_Practice>
+    </modules>
+    <frontend>
+        <routers>
+            <practice>
+                <use>standard</use>
+                <args>
+                    <module>Ccc_Practice</module>
+                    <frontName>practice</frontName>
+                </args>
+            </practice>
+        </routers>
+    </frontend>
+    <global>
         <models>
             <practice>
                 <class>Ccc_Practice_Model</class>
@@ -46,6 +64,9 @@
                 <entities>
                     <practice>
                         <table>practice</table>
+                <entities>
+                    <practice>
+                        <table>product</table>
                     </practice>
                 </entities>
             </practice_resource>
@@ -68,6 +89,17 @@
                       <data>Ccc_Practice_Helper_NewData</data>
                   </rewrite>
             </practice> -->
+            </practice>
+        </blocks>
+        <helpers>
+            <practice>
+                <class>Ccc_Practice_Helper</class>
+            </practice>
+            <practice>
+                  <rewrite>
+                      <data>Ccc_Practice_Helper_NewData</data>
+                  </rewrite>
+            </practice>
         </helpers>
         <events>
             <cms_page_prepare_save>
@@ -97,12 +129,14 @@
                 <args>
                     <module>Ccc_Practice</module>
                     <frontName>practice</frontName>
+                    <frontName>Practice</frontName>
                 </args>
             </practice>
             <!-- <adminhtml>
                 <args>
                     <modules>
                         <ccc_practice before='Mage_Adminhtml'>Ccc_Practice_Adminhtml</ccc_practice>
+                        <ccc_practice before ='Mage_Adminhtml_Catalog'>Ccc_Practice_Adminhtml</ccc_practice>
                     </modules>
                 </args>
             </adminhtml> -->
@@ -115,4 +149,13 @@
             </updates>
         </layout>
     </admin>
+</config>
+  </admin>
+  <layout>
+      <updates>
+        <practice>
+          <file>practice.xml</file>
+        </practice>
+      </updates>
+    </layout>
 </config>
