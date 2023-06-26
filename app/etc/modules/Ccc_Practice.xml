@@ -3,7 +3,7 @@
     <modules>
         <Ccc_Practice>
             <active>true</active>
-            <codePool>core</codePool>
+            <codePool>local</codePool>
         </Ccc_Practice>
     </modules>
 </config>
