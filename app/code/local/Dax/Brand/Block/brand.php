@@ -6,43 +6,48 @@ class Dax_Brand_Block_Brand extends Mage_Core_Block_Template
         parent::__construct();
     }
 
-    public function getBrands()
+    public function getCollection()
     {
         return Mage::getModel('brand/brand')->getCollection()->addOrder('sort_order', 'ASC');
     }
 
-    public function getBrand()
+    public function getBrands()
     {
-        $id = $this->getRequest()->getParam('id');
-        return Mage::getModel('brand/brand')->load($id);
+        return Mage::getModel('brand/brand')->getCollection()->addFieldToFilter('brand_id', $this->getRequest()->getParam('id'));
     }
 
-    public function getProductsByBrand()
+    public function getProducts()
     {
-        $brandAttributeCode = 'brand'; // Replace with your brand attribute code
+        if ($this->getRequest()->getParam('cat')) 
+        {
+            $category = '*';
+        }
+        
+        $category = $this->getRequest()->getParam('cat');
+        $brandAttributeCode = 'brand';
         $brandAttribute = Mage::getSingleton('eav/config')->getAttribute('catalog_product', $brandAttributeCode);
 
-        $brandValue = $this->getRequest()->getParam('id'); // Replace with your desired brand attribute value (integer)
+        $productCollection = Mage::getModel('catalog/product')->load($category);
+        $brandValue = $this->getRequest()->getParam('id'); 
         $productCollection = Mage::getModel('catalog/product')->getCollection()
             ->addAttributeToFilter($brandAttributeCode, $brandValue)
             ->getAllIds();
 
         $products = Mage::getModel('catalog/product')->getCollection()
             ->addIdFilter($productCollection)
+            ->addCategoryFilter(Mage::getModel('catalog/category')->load($category))
             ->addAttributeToSelect('*');
+
         return $products;
     }
 
-    public function getProductUrl($product)
+    public function getCategory()
     {
-        
-    $rewriteCollection = Mage::getModel('core/url_rewrite')->getCollection()
-    ->addFieldToFilter('product_id', array('in' => $productIds))
-    ->addFieldToFilter('is_system', 1);
-    }    
+        $categories = Mage::getModel('catalog/category')
+            ->getCollection()
+            ->addAttributeToSelect('name')
+            ->addIsActiveFilter();
 
+        return $categories;
+    }
 }
-
-
-
-
