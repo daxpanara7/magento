@@ -31,7 +31,13 @@ class Dax_Brand_Block_Brand extends Mage_Core_Block_Template
         $brandValue = $this->getRequest()->getParam('id'); 
         $productCollection = Mage::getModel('catalog/product')->getCollection()
             ->addAttributeToFilter($brandAttributeCode, $brandValue)
+		    // ->join(
+		    //     array('eav_attribute' => $topColorAttribute->getBackendTable()),
+		    //     'eav_attribute.entity_id = e.entity_id AND eav_attribute.attribute_id = ' . $topColorAttribute->getId(),
+		    //     array('top_color' => 'eav_attribute.value')
+		    // );
             ->getAllIds();
+
 
         $products = Mage::getModel('catalog/product')->getCollection()
             ->addIdFilter($productCollection)
@@ -49,5 +55,13 @@ class Dax_Brand_Block_Brand extends Mage_Core_Block_Template
             ->addIsActiveFilter();
 
         return $categories;
+    }
+
+    public function getProductUrl($product)
+    {
+        $productId = $product->getId(); 
+        $rewrite = Mage::getModel('core/url_rewrite')->load($productId,'product_id');
+        $requestPath = $rewrite->getRequestPath();
+        return $requestPath;
     }
 }

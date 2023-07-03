@@ -2,6 +2,7 @@
 $installer = new Mage_Eav_Model_Entity_Setup('core_setup');
 $installer->startSetup();
 $installer->addAttribute(4, 'brand', array(
+    'group'          => 'General',
     'type'          => 'int',
     'input'         => 'select',
     'label'         => 'Brand',

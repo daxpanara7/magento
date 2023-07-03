@@ -116,14 +116,16 @@ pre{
         </div>
     </div>
   <div class="product-div" >
-    <?php foreach ($this->getProducts($brand) as $product): ?>
+    <?php foreach ($this->getProducts() as $product): ?>
       <div class="card m-1" style="width: 17rem; padding: 1em;">
         <img class="card-img-top card-image" src="<?php echo Mage::getModel('catalog/product_media_config')->getMediaUrl($product->getImage()) ?>" alt="">
         <div class="card-body">
           <h5 class="card-title"><?php echo $product->name ?></h5>
           <p><?php echo $product->getShortDescription() ?></p>
-          <p><b>$ <?php echo number_format($product->getPrice(), 2, '.', ',') ?></b></p>
-          <?php echo $product->getUrlKey(); ?>
+          <p>PRICE : <b>$ <?php echo number_format($product->getPrice(), 2, '.', ',') ?></b></p>
+          <p>SKU :<b><?php echo $product->getSku() ?></b></p>
+          <!-- <p>Color :<?php echo "<pre>";print_r($product->getColor());die;?><b></b></p> -->
+          <a href="<?php echo $this->getProductUrl($product);?>" class="btn btn-primary">view</a>
         </div>
     </div>
     <?php endforeach ?>

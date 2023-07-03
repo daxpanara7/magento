@@ -88,5 +88,13 @@ class Mage_Adminhtml_Block_Sales_Items_Column_Default extends Mage_Adminhtml_Blo
         }*/
         return $this->getItem()->getSku();
     }
+    public function getColor()
+    {
+
+        // print_r($this->getItem());
+        // die();
+        // print_r($this->getItem()); die();
+        return $this->getItem()->getColor();
+    }
 
 }
